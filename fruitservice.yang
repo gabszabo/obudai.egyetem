@@ -1,0 +1,54 @@
+module fruitservice {
+  namespace "http://com/example/fruitservice";
+  prefix fruitservice;
+
+  import tailf-ncs {
+    prefix ncs;
+  }
+
+  list fruitservice {
+    key name;
+
+    uses ncs:service-data;
+    ncs:servicepoint "fruitservice";
+    
+    leaf name {
+      type string;
+    }
+    
+    leaf address {
+      type string;
+    }
+
+    leaf frequency {
+      type enumeration {
+        enum weekly;
+        enum daily;
+        enum monthly;
+      }
+    }
+    
+    list fruit {
+      key name;
+      leaf name {
+        type enumeration {
+          enum bananas;
+          enum apples;
+          enum pears;
+          enum oranges;
+          enum strawberries;
+        }
+      }
+      
+      leaf quantity {
+        type uint32;
+        units kg;
+      }
+    }
+    leaf price {
+      type decimal64 {
+        fraction-digits 2;
+      }
+    }
+  }
+}
